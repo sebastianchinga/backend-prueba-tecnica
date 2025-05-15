@@ -10,14 +10,13 @@ const app = express();
 
 db.authenticate().then(() => console.log('Database connected')).catch(e => console.log(e))
 
-const dominiosPermitidos = [process.env.URL_FRONTEND];
+const dominiosPermitidos = ['https://adminin-tasks.netlify.app'];
 const corsOptions = {
     origin: function (origin, callback) {
-        if (dominiosPermitidos.indexOf(origin) !== -1) {
-            // El origen del request esta permitido
+        if (!origin || dominiosPermitidos.includes(origin)) {
             callback(null, true);
         } else {
-            callback(new Error('No permitido por CORS'))
+            callback(new Error('No permitido por CORS'));
         }
     }
 }
