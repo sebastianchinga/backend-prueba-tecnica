@@ -74,5 +74,9 @@ export const confirmar = async (req, res) => {
 
 export const perfil = (req, res) => {
     const { usuario } = req;
-    res.json(usuario)
+    res.json({
+        id: usuario.id,
+        nombre: usuario.nombre,
+        email: usuario.email
+    })
 }
