@@ -18,6 +18,7 @@ export const login = async (req, res) => {
 
     if (await usuario.comprobarPassword(password)) {
         res.json({
+            id: usuario.nombre,
             nombre: usuario.nombre,
             email: usuario.email,
             token: generarJWT(usuario.id)
