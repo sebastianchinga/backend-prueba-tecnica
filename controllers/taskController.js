@@ -6,7 +6,9 @@ export const home = async (req, res) => {
 }
 
 export const crear = async (req, res) => {
+    const { usuario } = req
     const task = new Task(req.body);
+    task.usuarios_id = usuario.id;
     const resultado = await task.save();
     res.status(200).json(resultado)
 }

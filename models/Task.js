@@ -1,5 +1,6 @@
-import { Sequelize } from "sequelize";
+import { DataTypes, Sequelize } from "sequelize";
 import db from "../config/db.js";
+import Usuario from "./Usuario.js";
 
 const Task = db.define('tareas', {
     titulo: {
@@ -11,6 +12,13 @@ const Task = db.define('tareas', {
     estado: {
         type: Sequelize.BOOLEAN,
         defaultValue: false
+    },
+    usuarios_id: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: Usuario,
+            key: 'id'
+        }
     }
 }, {
     timestamps: false

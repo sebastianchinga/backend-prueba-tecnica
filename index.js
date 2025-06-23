@@ -2,15 +2,17 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import express from 'express';
 import db from './config/db.js';
-import router from './routes/index.js';
+import tasksRoutes from './routes/tasksRoutes.js';
+import usuariosRoutes from './routes/usuariosRoutes.js';
 
 dotenv.config({ path: './.env' });
 
 const app = express();
+app.use(express.json())
 
 db.authenticate().then(() => console.log('Database connected')).catch(e => console.log(e))
 
-const dominiosPermitidos = ['https://adminin-tasks.netlify.app'];
+const dominiosPermitidos = ['http://localhost:5173'];
 const corsOptions = {
     origin: function (origin, callback) {
         if (!origin || dominiosPermitidos.includes(origin)) {
@@ -26,7 +28,8 @@ app.use(cors(corsOptions))
 
 app.use(express.json());
 
-app.use('/', router);
+app.use('/api/tareas', tasksRoutes);
+app.use('/api/usuarios', usuariosRoutes);
 
 const PORT = process.env.PORT || 4000
 
