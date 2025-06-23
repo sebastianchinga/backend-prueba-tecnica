@@ -26,7 +26,7 @@ export const login = async (req, res) => {
         const error = new Error('Password incorrecto');
         res.status(400).json({ msg: error.message });
     }
-    
+
 }
 
 export const registrar = async (req, res) => {
@@ -70,4 +70,9 @@ export const confirmar = async (req, res) => {
         const e = new Error('Hubo un error');
         return res.status(400).json({ msg: e.message });
     }
+}
+
+export const perfil = (req, res) => {
+    const { usuario } = req;
+    res.json(usuario)
 }
