@@ -44,7 +44,9 @@ export const cambiar = async (req, res) => {
 
 export const filtrar = async (req, res) => {
     const { estado } = req.params
-    const task = await Task.findAll({ where: { estado } });
+    const { usuario } = req
+    const id = usuario.id
+    const task = await Task.findAll({ where: { usuarios_id: id,  estado} });
     if (!task) {
         res.status(400).json({ msg: 'Tarea no encontrada' });
         return
