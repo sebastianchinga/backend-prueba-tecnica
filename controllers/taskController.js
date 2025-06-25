@@ -3,6 +3,10 @@ import Task from "../models/Task.js"
 export const home = async (req, res) => {
     const { usuario } = req;
     const tasks = await Task.findAll({ where: { usuarios_id: usuario.id }, order: [['id', 'DESC']] });
+    if (!tasks) {
+        return;
+    }
+
     res.json(tasks);
 }
 
