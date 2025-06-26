@@ -18,7 +18,7 @@ const resetearPassword = async (datos) => {
         subject: "Resetea tu Password",
         html: `
             <p>Hola ${nombre}, para recuperar tu cuenta sigue el siguiente enlace:</p>
-            <a href="">Resetear Password</a>
+            <a href="http://localhost:5173/olvide-password/${token}">Resetear Password</a>
             <p>Si no creaste esta cuenta, ignora este mensaje</p>
         `, // HTML body
     });

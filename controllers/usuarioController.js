@@ -135,9 +135,14 @@ export const cambiarPassword = async (req, res) => {
         return res.status(400).json({ msg: error.message });
     }
 
-    usuario.password = password;
     const salt = await bcrypt.genSalt(10);
-    await bcrypt.hash(usuario.password, salt);
-    console.log(usuario.toJSON());
+    usuario.password = await bcrypt.hash(password, salt);
+    usuario.token = null
+    try {
+        await usuario.save();
+        res.json({msg: 'Password modificado'})
+    } catch (error) {
+        console.log(error)
+    }
 
 }
