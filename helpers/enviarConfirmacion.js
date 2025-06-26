@@ -1,13 +1,15 @@
 import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const confirmarCuenta = async (datos) => {
     // Looking to send emails in production? Check out our Email API/SMTP product!
     var transporter = nodemailer.createTransport({
-        host: "sandbox.smtp.mailtrap.io",
-        port: 2525,
+        host: process.env.EMAIL_HOST,
+        port: process.env.EMAIL_PORT,
         auth: {
-            user: "734a381f345758",
-            pass: "c7e8819700e904"
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS
         }
     });
     const { nombre, email, token } = datos
@@ -18,7 +20,7 @@ const confirmarCuenta = async (datos) => {
         subject: "Confirma tu cuenta",
         html: `
             <p>Hola ${nombre}, para confirmar tu cuenta sigue el siguiente enlace:</p>
-            <a href="http://localhost:5173/confirmar-cuenta/${token}">Confirmar Cuenta</a>
+            <a href="${process.env.URL_FRONTEND}/confirmar-cuenta/${token}">Confirmar Cuenta</a>
             <p>Si no creaste esta cuenta, ignora este mensaje</p>
         `, // HTML body
     });

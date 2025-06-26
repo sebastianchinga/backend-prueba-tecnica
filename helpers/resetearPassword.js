@@ -1,4 +1,6 @@
 import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+dotenv.config()
 
 const resetearPassword = async (datos) => {
     // Looking to send emails in production? Check out our Email API/SMTP product!
@@ -18,7 +20,7 @@ const resetearPassword = async (datos) => {
         subject: "Resetea tu Password",
         html: `
             <p>Hola ${nombre}, para recuperar tu cuenta sigue el siguiente enlace:</p>
-            <a href="http://localhost:5173/olvide-password/${token}">Resetear Password</a>
+            <a href="${process.env.URL_FRONTEND}/olvide-password/${token}">Resetear Password</a>
             <p>Si no creaste esta cuenta, ignora este mensaje</p>
         `, // HTML body
     });

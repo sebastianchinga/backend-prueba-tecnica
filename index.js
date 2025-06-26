@@ -12,7 +12,7 @@ app.use(express.json())
 
 db.authenticate().then(() => console.log('Database connected')).catch(e => console.log(e))
 
-const dominiosPermitidos = ['http://localhost:5173'];
+const dominiosPermitidos = [process.env.URL_FRONTEND];
 const corsOptions = {
     origin: function (origin, callback) {
         if (!origin || dominiosPermitidos.includes(origin)) {
