@@ -25,6 +25,9 @@ DB_PASSWORD=tu_contraseña
 DB_NAME=tareafy_db
 DB_PORT=3306
 
+# String para el JWT
+PALABRA_SECRETA=secretword
+
 # Configuración de correo (Nodemailer)
 EMAIL_HOST=smtp.ejemplo.com
 EMAIL_PORT=587

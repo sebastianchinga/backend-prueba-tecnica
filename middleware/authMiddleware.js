@@ -7,7 +7,7 @@ const checkAuth = async (req, res, next) => {
         
         try {
             token = req.headers.authorization.split(" ")[1];
-            const decoded = await jwt.verify(token, 'palabrasupersecreta');
+            const decoded = await jwt.verify(token, process.env.PALABRA_SECRETA);
             req.usuario = await Usuario.findOne({ where: { id: decoded.id } })
             return next();
         } catch (e) {
