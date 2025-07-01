@@ -1,13 +1,17 @@
 import Task from "../models/Task.js"
 
 export const home = async (req, res) => {
-    const { usuario } = req;
-    const tasks = await Task.findAll({ where: { usuarios_id: usuario.id }, order: [['id', 'DESC']] });
-    if (!tasks) {
-        return;
+
+    if (req.usuario) {
+        const { usuario } = req; // Destructuramos el objeto req
+        // Hacemos una consulta
+        const tasks = await Task.findAll({ where: { usuarios_id: usuario.id }, order: [['id', 'DESC']] });
+
+        if (!tasks) return;
+
+        res.json(tasks);
     }
 
-    res.json(tasks);
 }
 
 export const crear = async (req, res) => {
@@ -50,7 +54,7 @@ export const filtrar = async (req, res) => {
     const { estado } = req.params
     const { usuario } = req
     const id = usuario.id
-    const task = await Task.findAll({ where: { usuarios_id: id,  estado} });
+    const task = await Task.findAll({ where: { usuarios_id: id, estado } });
     if (!task) {
         res.status(400).json({ msg: 'Tarea no encontrada' });
         return
