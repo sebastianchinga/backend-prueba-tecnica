@@ -12,7 +12,7 @@ app.use(express.json())
 
 db.authenticate().then(() => console.log('Database connected')).catch(e => console.log(e))
 
-const dominiosPermitidos = [process.env.URL_FRONTEND];
+const dominiosPermitidos = ['https://adminin-tasks.netlify.app'];
 const corsOptions = {
     origin: function (origin, callback) {
         if (!origin || dominiosPermitidos.includes(origin)) {
